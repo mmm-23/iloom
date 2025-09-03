@@ -1,0 +1,394 @@
+/*
+* 공통 스타일: 너비와 중앙 정렬
+* .container: 화면 너비를 제한하고 중앙에 정렬하는 역할
+* .full-width: 배경을 화면 전체에 꽉 채우는 역할
+* .full-width .container: .full-width 내부의 콘텐츠를 중앙에 정렬하는 역할
+*/
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* 히어로 섹션 아래의 첫 번째 .container만 상단 여백을 추가 */
+.about-nav.container {
+  margin-top: 100vh;
+}
+
+.full-width {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 0;
+}
+
+/* Header */
+
+.header-w {
+  background-color: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+.header-w a {
+  color: #fff;
+}
+.header-w .logo-w img {
+  height: 28px;
+}
+.header-w .lang a {
+  color: #fff;
+}
+
+.header-w .lang a::after {
+  background: url(/image/common/ico-arrow-down-w.svg) no-repeat;
+}
+
+/* Hero section */
+
+section.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('/image/about/hero-1.jpg') no-repeat center center/cover;
+  width: 100%;
+  height: 100vh;
+  z-index: -3;
+  position: absolute;
+  top: 0;
+}
+
+section.hero .logo {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+}
+
+section.hero .logo img {
+  width: 69.8125rem;
+}
+
+section.hero h2 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 60px;
+  line-height: 84px;
+  color: #fff;
+  text-align: center;
+}
+
+nav.about-nav {
+  display: flex;
+  justify-content: center;
+}
+
+nav.about-nav ul {
+  display: flex;
+  flex-direction: row;
+}
+
+nav.about-nav ul li a {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  color: #b2b2b2;
+  padding: 18px 31px;
+}
+
+nav.about-nav ul li a.active {
+  color: #111;
+}
+
+/* Philosophy section */
+
+.philosophy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 150px;
+  margin-bottom: 180px;
+}
+
+.philosophy .tit {
+  text-align: center;
+}
+
+.philosophy .tit h3 {
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 40px;
+  color: #111;
+}
+
+.philosophy img {
+  width: 620px;
+  margin-bottom: 110px;
+}
+
+.philosophy ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 74px;
+  text-align: left;
+}
+
+.philosophy ul li {
+  display: flex;
+  flex-direction: column;
+}
+.philosophy ul li+li{
+  border-left: 1px solid #dedede;
+  padding-left: 74px;
+}
+
+.philosophy p {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 36px;
+  color: #111;
+  margin: 0 0;
+}
+
+.philosophy span {
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 35px;
+  color: #b2b2b2;
+  margin-top: 10px;
+}
+
+/* CoreValue section */
+
+.coreValue {
+  padding: 160px 0 225px 0;
+  background-color: #F8F8F8;
+}
+
+.coreValue .tit {
+  text-align: center;
+  margin-bottom: 110px;
+}
+.coreValue .tit p {
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 30px;
+  color: #b2b2b2;
+}
+
+.coreValue ul {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.coreValue ul li {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+.coreValue li p {
+  font-weight: 600;
+  font-size: 35px;
+  line-height: 46px;
+  color: #111;
+  margin: 25px;
+}
+.coreValue li span {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 32px;
+  color: #111;
+}
+
+/* History section */
+
+.history { 
+  padding-bottom: 250px;
+}
+.history .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.history .menu {
+  position: sticky;
+}
+.history .menu p {
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 30px;
+  color: #b2b2b2;
+}
+.history nav {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 90px;
+}
+.history nav a {
+  font-weight: 500;
+  font-size: 53px;
+  line-height: 74px;
+  color: #dedede;
+  padding: 0;
+}
+.history nav .on {
+  color: #111;
+}
+.history .slider img {
+  width: 25.8125rem;
+  height: 15.4375rem;
+}
+.history ul li {
+  display: grid;
+  grid-gap: 0;
+  grid-template-columns: 107px auto;
+}
+.history ul li.year,
+.history ul li img {
+  display: none;
+}
+
+.history ul li p {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 32px;
+  color: #111;
+}
+.history ul li p:first-child {
+  color: #9c9c9c;
+}
+
+/* Vision section */
+
+.vision {
+  padding: 225px 0;
+  background-color: #000;
+}
+
+.vision .tit,
+.globalLocation .tit {
+  text-align: center;
+}
+.vision .tit h3 {
+  color: #fff;
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 30px;
+}
+.vision .tit h2 {
+  font-weight: 600;
+  font-size: 120px;
+  line-height: 156px;
+}
+
+.vision p,
+.globalLocation p {
+  color: #fff;
+  line-height: 22px;
+}
+.vision p:first-of-type {
+  color: #fff;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 71px;
+}
+
+.vision img { 
+  display: flex;
+  justify-content: center;
+  margin: 290px 0 155px 0;
+}
+.vision ul li { 
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 0;
+  /* grid-template-columns: auto 630px; */
+  border-bottom: 1px solid #282828;
+  padding: 20px 0 50px 0;
+}
+
+.vision ul li>p:first-of-type {
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 52px
+}
+.vision ul li>p:last-of-type{
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 32px
+}
+
+.vision ul li em {
+  font-style: normal;
+  font-weight: 700 !important;
+  font-size: 20px;
+  line-height: 32px;
+  margin-bottom: 12px;
+}
+
+/* GlobalLocation section */
+
+.globalLocation {
+  padding: 225px 0;
+  background-color: #000;
+}
+.globalLocation .map-warp {
+  position: relative;
+}
+.globalLocation .map-warp::before {
+  content: "";
+  display: block;
+  background: url('/image/about/global-location-map.png') no-repeat center center/contain;
+  height: 600px;
+}
+.globalLocation ul {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
+  text-align: left;
+  position: absolute;
+  bottom: 0px;
+}
+.globalLocation ul li {
+  
+}
+
+.globalLocation ul li>p:first-of-type {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 26px;
+}
+.globalLocation ul li>p:last-of-type {
+  color: #666;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+}
+.globalLocation ul li a {
+  color: #fff;
+  margin-top: 14px;
+}
+
+/* Contact section */
+.contact {
+  padding: 225px 0;
+  background-color: #000;
+  color: #fff;
+}
+.contact .visual {
+  background: url('/image/about/global-location-img.s.png') no-repeat center center/contain;
+  height: 580px;
+  background-size: cover;
+}
+
+/* Identity section */
+.identity {
+
+}

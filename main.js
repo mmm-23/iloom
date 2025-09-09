@@ -2,32 +2,47 @@ gsap.registerPlugin(ScrollTrigger);
 
 gsap.to('.cover', {
   scrollTrigger: {
+    // markers: true,
     trigger: '.hero',
     start: 'top top',
+    // start: ()=>window.innerHeight,
     end: 'bottom bottom',
+    // end: '+=1000',
     scrub: true,
     pin: true,
     anticipatePin: 1,
     pinSpacing: false
   },
   scale: 1.5,
-  // width: '100vh',   // 가로 → 100vh
-  // height: '100vh',// 확대
-  transformOrigin: 'center bottom', // 아래쪽 기준으로 커짐
+  transformOrigin: 'center bottom',
   ease: 'none'
 });
 
 gsap.to('.text', {
   scrollTrigger: {
+    markers: true,
     trigger: '.hero',
     start: 'top top',
-    end: 'bottom top',
+    end: 'bottom bottom',
     scrub: true,
+    pin: true,
   },
+  // display: 'block',
   color: '#fff',
   ease: 'none',
-  zIndex: 1 
+  zIndex: 10 
 });
+
+
+var swiper = new Swiper(".swiper", {
+  slidesPerView : 'auto',
+  spaceBetween: 38,
+  // loop: true,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -46,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: 'power3.out',
         delay: i * 0.2, // 순차 등장
         scrollTrigger: {
+          // markers: true,
           trigger: span,
           start: 'top 80%',
           toggleActions: 'play none none reverse'
@@ -64,9 +80,10 @@ const careersBtn = document.querySelector('.careers .more-black');
 
 gsap.timeline({
   scrollTrigger: {
+    // markers: true,
     trigger: '.careers',
-    start: 'top 80%',         // 화면 80%에 닿으면 시작
-    end: 'bottom 20%',        // 화면 20%쯤에서 끝
+    start: 'top 80%',
+    end: 'bottom 20%',
     scrub: true
   }
 })
@@ -95,3 +112,56 @@ gsap.timeline({
 
 
 
+const tabLinks = document.querySelectorAll('.tabnav ul li');
+const tabContents = document.querySelectorAll('.tab-content > div');
+
+tabLinks.forEach((link) => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        // 기존 active 클래스 제거
+        document.querySelector('.tabnav .active').classList.remove('active');
+        
+        // 클릭된 탭에 active 클래스 추가
+        link.classList.add('active');
+
+        // 모든 탭 콘텐츠 숨기기
+        tabContents.forEach((content) => {
+            content.classList.remove('active');
+        });
+
+        // 클릭된 탭의 href와 일치하는 콘텐츠 보이기
+        const targetId = link.querySelector('a').getAttribute('href');
+        document.querySelector(targetId).classList.add('active');
+    });
+});
+
+
+
+
+
+gsap.timeline({
+  scrollTrigger: {
+    trigger: '.careers',
+    start: 'top top',
+    end: '+=1000',
+    scrub: true,
+    pin: true,
+    pinSpacing: true
+  }
+})
+.to('.careers-inner', {
+  width: '100vw',
+  height: '100vh',
+  ease: 'none'
+}, 0)
+.fromTo('.careers .tit-w', 
+  { y: 50, opacity: 0 }, 
+  { y: 0, opacity: 1, ease: 'back.out(1.7)' }, 
+  0.5 // 수정: 텍스트 애니메이션 시작 시간을 0.5초로 설정
+)
+.fromTo('.careers .more-black',
+  { y: 50, opacity: 0 },
+  { y: 0, opacity: 1, ease: 'back.out(1.7)' },
+  0.8 // 수정: 버튼 애니메이션 시작 시간을 0.8초로 설정 (텍스트보다 늦게)
+);

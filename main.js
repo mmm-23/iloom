@@ -1,9 +1,24 @@
 gsap.registerPlugin(ScrollTrigger);
 
-document.addEventListener('DOMContentLoaded', () => {
+// 전역 변수
+let leadershipTimeline = null;
+
+// 메인 초기화 함수
+document.addEventListener('DOMContentLoaded', function () {
+  initHeader();
+  initHeroSection();
+  initSwiper();
+  initTextInteraction();
+  initServicesSection();
+  initLeadershipSection();
+  initCareersSection();
+  initFooterSection();
+});
+
+// === 헤더 초기화 ===
+function initHeader() {
   const header = document.querySelector('header');
   if (!header) return;
-
 
   gsap.set(header, {
     y: '0%'
@@ -14,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
       y: '0%',
       backgroundColor: isTop ? 'transparent' : 'rgba(255,255,255,0.4)',
       backdropFilter: isTop ? 'none' : 'blur(10px)',
-      webkitBackdropFilter: isTop ? 'none' : 'blur(10px)', // Safari 대응
+      webkitBackdropFilter: isTop ? 'none' : 'blur(10px)',
       duration: 0.35,
       ease: 'power3.out'
     });
@@ -28,40 +43,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ScrollTrigger를 한 번만 생성 — 방향과 최상단(투명) 체크 포함
   ScrollTrigger.create({
     start: 0,
     end: "max",
     onUpdate: (self) => {
       const s = self.scroll();
       if (s <= 0) {
-        // 맨 위: 투명 배경으로
         showHeader(true);
       } else if (self.direction === 1 && s > 50) {
-        // 아래로 스크롤: 숨김
         hideHeader();
       } else if (self.direction === -1) {
-        // 위로 스크롤: 보임(배경/그림자 적용)
         showHeader(false);
       }
     }
   });
+}
 
-});
-
-
-
-
-
-// --- cover 섹션 ---
-
-document.addEventListener('DOMContentLoaded', function () {
-
+// === Hero 섹션 (cover) 초기화 ===
+function initHeroSection() {
   const coverImage = document.querySelector('.cover-image');
   const coverClip = document.querySelector('.cover-clip');
   const textWhite = document.querySelector('.text.white');
 
-  // CSS clip-path
+  if (!coverImage || !coverClip || !textWhite) return;
+
   gsap.timeline({
       scrollTrigger: {
         trigger: '.hero',
@@ -70,8 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
         scrub: true,
         pin: true,
         anticipatePin: 1,
-        pinSpacing: true,
-        // markers: true,
+        pinSpacing: true
       }
     })
     .to(coverImage, {
@@ -82,52 +86,44 @@ document.addEventListener('DOMContentLoaded', function () {
       ease: 'none'
     }, 0)
     .fromTo(coverClip, {
-      clipPath: 'inset(47% 0 0 0)' // 위쪽 완전 숨김 (아래에서 위로 올라옴)
+      clipPath: 'inset(47% 0 0 0)'
     }, {
-      clipPath: 'inset(0% 0 0 0)', // 완전 표시
+      clipPath: 'inset(0% 0 0 0)',
       ease: 'none'
     }, 0)
     .fromTo(textWhite, {
-      clipPath: 'inset(100% 0 0 0)' // 위쪽 완전 숨김  
+      clipPath: 'inset(100% 0 0 0)'
     }, {
-      clipPath: 'inset(0% 0 0 0)', // 완전 표시
+      clipPath: 'inset(0% 0 0 0)',
       ease: 'none'
     }, 0);
-});
+}
 
-
-
-
-
-
-// --- swiper 섹션 ---
-var swiper = new Swiper(".swiper", {
-  slidesPerView: 'auto',
-  spaceBetween: 38,
-  // loop: true,
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-  breakpoints: {
-    0: {
-      spaceBetween: 16
+// === Swiper 초기화 ===
+function initSwiper() {
+  new Swiper(".swiper", {
+    slidesPerView: 'auto',
+    spaceBetween: 38,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
     },
-    768: {
-      spaceBetween: 20
-    },
-    1200: {
-      spaceBetween: 40
+    breakpoints: {
+      0: {
+        spaceBetween: 16
+      },
+      768: {
+        spaceBetween: 20
+      },
+      1200: {
+        spaceBetween: 40
+      }
     }
-  }
-});
+  });
+}
 
-
-
-
-
-// --- text-interaction 섹션 ---
-document.addEventListener('DOMContentLoaded', () => {
+// === 텍스트 인터랙션 초기화 ===
+function initTextInteraction() {
   const spans = document.querySelectorAll('.text-interaction span');
   spans.forEach((span, i) => {
     const wTarget = 420;
@@ -143,62 +139,66 @@ document.addEventListener('DOMContentLoaded', () => {
       ease: 'power3.out',
       delay: i * 0.2,
       scrollTrigger: {
-        // markers: true,
         trigger: span,
         start: 'top 80%',
         toggleActions: 'play none none reverse'
       }
     });
   });
-});
+}
 
-
-
-// --- services 섹션 --- 
-
-const servicesSwiper = new Swiper(".my-services-swiper", {
-  effect: "fade",
-  fadeEffect: {
-    crossFade: true,
-  },
-  speed: 600,
-});
-
-const tabLinks = document.querySelectorAll('.tabnav li');
-const tabContents = document.querySelectorAll('.tab-content > div');
-
-tabLinks.forEach((link, index) => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    document.querySelector('.tabnav .active').classList.remove('active');
-    link.classList.add('active');
-    tabContents.forEach((content) => {
-      content.classList.remove('active');
-    });
-    const targetId = link.querySelector('a').getAttribute('href');
-    document.querySelector(targetId).classList.add('active');
-
-    servicesSwiper.slideTo(index);
+// === Services 섹션 초기화 ===
+function initServicesSection() {
+  const servicesSwiper = new Swiper(".my-services-swiper", {
+    effect: "fade",
+    fadeEffect: {
+      crossFade: true
+    },
+    speed: 600,
   });
-});
 
+  const tabLinks = document.querySelectorAll('.tabnav li');
+  const tabContents = document.querySelectorAll('.tab-content > div');
 
+  tabLinks.forEach((link, index) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
 
+      document.querySelector('.tabnav .active') ?.classList.remove('active');
+      link.classList.add('active');
 
+      tabContents.forEach((content) => {
+        content.classList.remove('active');
+      });
 
-// --- Leadership Section ---
-function initLeadershipTimeline() {
+      const targetId = link.querySelector('a') ?.getAttribute('href');
+      if (targetId) {
+        document.querySelector(targetId) ?.classList.add('active');
+      }
+
+      servicesSwiper.slideTo(index);
+    });
+  });
+}
+
+// === Leadership 섹션 초기화 ===
+function initLeadershipSection() {
   const allImages = document.querySelectorAll(".leadership .bg-item img");
-  // 위쪽 이미지 1~3
-  const topImages = Array.from(allImages).slice(0, 3);
-  // 아래쪽 이미지 4~5
-  const bottomImages = Array.from(allImages).slice(3, 5);
+  if (!allImages.length) return;
 
-  const oldTrigger = ScrollTrigger.getById("leadership");
-  if (oldTrigger) oldTrigger.kill();
+  // 기존 타임라인 정리
+  if (leadershipTimeline) {
+    leadershipTimeline.kill();
+    leadershipTimeline = null;
+  }
 
-  let tl = gsap.timeline({
+  ScrollTrigger.getAll().forEach(trigger => {
+    if (trigger.vars && (trigger.vars.trigger === ".leadership" || trigger.vars.pin === ".sticky-holder")) {
+      trigger.kill();
+    }
+  });
+
+  leadershipTimeline = gsap.timeline({
     scrollTrigger: {
       id: "leadership",
       trigger: ".leadership",
@@ -211,7 +211,7 @@ function initLeadershipTimeline() {
   });
 
   // 위쪽 이미지들 (1~3)
-  tl.fromTo(
+  leadershipTimeline.fromTo(
     ".leadership .bg-item:not(:nth-last-child(-n+2)) img", {
       yPercent: 80,
       opacity: 1,
@@ -225,7 +225,7 @@ function initLeadershipTimeline() {
   );
 
   // 마지막 이미지들 (4, 5)
-  tl.fromTo(
+  leadershipTimeline.fromTo(
     ".leadership .bg-item:nth-last-child(-n+2) img", {
       yPercent: 150,
       opacity: 1,
@@ -243,7 +243,7 @@ function initLeadershipTimeline() {
   );
 
   // 텍스트 & 버튼
-  tl.fromTo(".leadership .align-warp h3", {
+  leadershipTimeline.fromTo(".leadership .align-warp h3", {
     y: 30,
     opacity: 0
   }, {
@@ -252,7 +252,7 @@ function initLeadershipTimeline() {
     ease: "back.out(1.5)"
   }, 0.5);
 
-  tl.fromTo(".leadership .align-warp h2", {
+  leadershipTimeline.fromTo(".leadership .align-warp h2", {
     y: 30,
     opacity: 0
   }, {
@@ -261,7 +261,7 @@ function initLeadershipTimeline() {
     ease: "back.out(1.5)"
   }, 0.5);
 
-  tl.fromTo(".leadership .align-warp .more-black", {
+  leadershipTimeline.fromTo(".leadership .align-warp .more-black", {
     y: 20,
     opacity: 0
   }, {
@@ -271,86 +271,84 @@ function initLeadershipTimeline() {
   }, 0.5);
 }
 
-initLeadershipTimeline();
+// === Careers 섹션 초기화 ===
+function initCareersSection() {
+  const careersInner = document.querySelector('.careers-inner');
+  const careersContent = document.querySelector('.careers-content');
+  const careersBtn = document.querySelector('.careers .more-black');
 
+  if (!careersInner || !careersContent || !careersBtn) return;
 
-
-
-
-// --- careers 섹션 ---
-const careersInner = document.querySelector('.careers-inner');
-const careersContent = document.querySelector('.careers-content');
-const careersBtn = document.querySelector('.careers .more-black');
-
-gsap.timeline({
-    scrollTrigger: {
-      trigger: '.careers',
-      start: 'top top',
-      end: '+=1000',
-      scrub: true,
-      pin: true,
-      pinSpacing: true
-    }
-  })
-  .to(careersInner, {
-    width: '100vw',
-    height: '100vh',
-    ease: 'none'
-  }, 0)
-  .fromTo(careersContent, {
-    y: 50,
-    opacity: 0
-  }, {
-    y: 0,
-    opacity: 1,
-    ease: 'back.out(1.7)'
-  })
-  .to(careersBtn, {
-    opacity: 1,
-    y: 0,
-    ease: 'back.out(1.7)'
-  }, 0.2);
-
-
-
-
-
-// --- footer 섹션 --- 
-
-const footerBgEl = document.querySelector('.footer-bg');
-const ftWrapperEl = document.querySelector('.ft-wrapper');
-
-// 푸터 이미지 아래에서 위로
-if (footerBgEl) {
-  gsap.fromTo(footerBgEl, {
-    y: '100%',
-    opacity: 0
-  }, {
-    y: '0%',
-    opacity: 1,
-    ease: 'power2.out',
-    scrollTrigger: {
-      trigger: '.footer',
-      start: 'bottom bottom',
-      end: 'top bottom',
-      scrub: true
-    }
-  });
+  gsap.timeline({
+      scrollTrigger: {
+        trigger: '.careers',
+        start: 'top top',
+        end: '+=1000',
+        scrub: true,
+        pin: true,
+        pinSpacing: true
+      }
+    })
+    .to(careersInner, {
+      width: '100vw',
+      height: '100vh',
+      ease: 'none'
+    }, 0)
+    .fromTo(careersContent, {
+      y: 50,
+      opacity: 0
+    }, {
+      y: 0,
+      opacity: 1,
+      ease: 'back.out(1.7)'
+    })
+    .to(careersBtn, {
+      opacity: 1,
+      y: 0,
+      ease: 'back.out(1.7)'
+    }, 0.2);
 }
 
-// 푸터 컨텐츠 이미지가 올라온 후
-if (ftWrapperEl) {
-  gsap.fromTo(ftWrapperEl, {
-    y: 50,
-    opacity: 0
-  }, {
-    y: 0,
-    opacity: 1,
-    ease: 'power2.out',
-    scrollTrigger: {
-      trigger: '.footer',
-      start: 'top 90%',
-      toggleActions: 'play none none reverse'
-    }
-  });
+// === Footer 섹션 초기화 ===
+function initFooterSection() {
+  const footerBgEl = document.querySelector('.footer-bg');
+  const ftWrapperEl = document.querySelector('.ft-wrapper');
+
+  // 푸터 이미지 아래에서 위로
+  if (footerBgEl) {
+    gsap.fromTo(footerBgEl, {
+      y: '100%',
+      opacity: 0
+    }, {
+      y: '0%',
+      opacity: 1,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '.footer',
+        start: 'bottom bottom',
+        end: 'top bottom',
+        scrub: true
+      }
+    });
+  }
+
+  // 푸터 컨텐츠
+  if (ftWrapperEl) {
+    gsap.fromTo(ftWrapperEl, {
+      y: 50,
+      opacity: 0
+    }, {
+      y: 0,
+      opacity: 1,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '.footer',
+        start: 'top 90%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+  }
 }
+
+// === 외부에서 호출할 수 있는 함수들 ===
+window.initLeadershipTimeline = initLeadershipSection;

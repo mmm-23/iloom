@@ -1,15 +1,13 @@
 /*
-* 공통 스타일: 너비와 중앙 정렬
-* .container: 화면 너비를 제한하고 중앙에 정렬하는 역할
-* .full-width: 배경을 화면 전체에 꽉 채우는 역할
-* .full-width .container: .full-width 내부의 콘텐츠를 중앙에 정렬하는 역할
+* .container: 화면 너비를 제한, 중앙에 정렬
+* .full-width: 배경을 화면 전체
 */
+
 .container {
   max-width: 1600px;
   margin: 0 auto;
 }
 
-/* 히어로 섹션 아래의 첫 번째 .container만 상단 여백을 추가 */
 .about-nav.container {
   margin-top: 100vh;
 }
@@ -26,20 +24,41 @@
 
 /* Header */
 
-.header-w {
-  background-color: transparent;
-  position: fixed;
+/* .header-w {
+  display: flex;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 999;
-}
+  height: 98px;
+  z-index: 1000;
+} */
+/* header .header-warp{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+} */
 
 .header-w a {
   color: #fff;
 }
 .header-w .logo-w img {
   height: 28px;
+}
+
+header aside {
+  display: flex;
+  align-items: center;
+}
+header nav {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+header nav ul {
+  display: flex;
+  flex-direction: row;
 }
 .header-w .lang a {
   color: #fff;
@@ -270,6 +289,11 @@ nav.about-nav ul li a.active {
   padding: 225px 0;
   background-color: #000;
 }
+.vision .container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
 
 .vision .tit,
 .globalLocation .tit {
@@ -300,15 +324,17 @@ nav.about-nav ul li a.active {
 }
 
 .vision img { 
-  display: flex;
-  justify-content: center;
-  margin: 290px 0 155px 0;
+  display: block;
+  margin: 0 auto;
+  width: 70rem;
+  margin: 290px auto 155px;
 }
+
 .vision ul li { 
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(1, 1fr);
   grid-gap: 0;
-  /* grid-template-columns: auto 630px; */
+  grid-template-columns: auto 630px;
   border-bottom: 1px solid #282828;
   padding: 20px 0 50px 0;
 }
@@ -384,8 +410,9 @@ nav.about-nav ul li a.active {
 }
 .contact .visual {
   background: url('/image/about/global-location-img.s.png') no-repeat center center/contain;
-  height: 580px;
+  height: 725px;
   background-size: cover;
+  background-position-x: 100%;
 }
 
 /* Identity section */

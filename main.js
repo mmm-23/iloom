@@ -74,41 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 gsap.registerPlugin(ScrollTrigger);
 
-const careersBg = document.querySelector('.careers .background');
-const careersContent = document.querySelector('.careers .content');
-const careersBtn = document.querySelector('.careers .more-black');
-
-gsap.timeline({
-  scrollTrigger: {
-    // markers: true,
-    trigger: '.careers',
-    start: 'top 80%',
-    end: 'bottom 20%',
-    scrub: true
-  }
-})
-.to(careersBg, {
-  width: '100%',              // 최종 화면 꽉 채우기
-  height: '100%',             // 섹션 전체 높이
-  top: '50%',
-  left: '50%',
-  xPercent: -50,
-  yPercent: -50,
-  ease: 'none'
-})
-.to(careersContent, {
-  opacity: 1,
-  y: 0,
-  duration: 1,
-  ease: 'power3.out'
-}, "-=0.5")  // 배경 애니메이션과 살짝 겹치게 등장
-.to(careersBtn, {
-  opacity: 1,
-  y: 0,
-  duration: 0.8,
-  ease: 'power3.out'
-}, "-=0.3"); // 텍스트 뒤를 이어 버튼 등장
-
 
 
 
@@ -140,6 +105,10 @@ tabLinks.forEach((link) => {
 
 
 
+const careersBg = document.querySelector('.careers .background');
+const careersContent = document.querySelector('.careers .content');
+const careersBtn = document.querySelector('.careers .more-black');
+
 gsap.timeline({
   scrollTrigger: {
     trigger: '.careers',
@@ -158,10 +127,10 @@ gsap.timeline({
 .fromTo('.careers .tit-w', 
   { y: 50, opacity: 0 }, 
   { y: 0, opacity: 1, ease: 'back.out(1.7)' }, 
-  0.5 // 수정: 텍스트 애니메이션 시작 시간을 0.5초로 설정
+  0.5
 )
 .fromTo('.careers .more-black',
   { y: 50, opacity: 0 },
   { y: 0, opacity: 1, ease: 'back.out(1.7)' },
-  0.8 // 수정: 버튼 애니메이션 시작 시간을 0.8초로 설정 (텍스트보다 늦게)
+  0.8 // 텍스트보다 늦게
 );

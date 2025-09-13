@@ -68,42 +68,51 @@ function initHeroSection() {
   if (!coverImage || !coverClip || !textWhite) return;
 
   gsap.timeline({
-      scrollTrigger: {
-        trigger: '.hero',
-        start: 'top top',
-        end: '+=800',
-        scrub: true,
-        pin: true,
-        anticipatePin: 1,
-        pinSpacing: true
-      }
-    })
-    .to(coverImage, {
+    scrollTrigger: {
+      trigger: '.hero',
+      start: 'top top',
+      end: '+=800',
+      scrub: true,
+      pin: true,
+      anticipatePin: 1,
+      // pinSpacing: true
+    }
+  })
+    .set(coverImage, { xPercent: -50 })
+    .fromTo(coverImage, {
+      width: '92%',
+      height: '80%',
+      xPercent: -50,
+      filter: "brightness(1)"
+    }, {
       width: '100%',
-      height: '100%',
-      left: 0,
-      transformOrigin: 'center bottom',
-      ease: 'none'
+      height: '80%',
+      xPercent: -50,
+      transformOrigin: 'center top',
+      filter: "brightness(0.7)",
+      ease: 'power3.in'
     }, 0)
     .fromTo(coverClip, {
-      clipPath: 'inset(47% 0 0 0)'
+      clipPath: 'inset(46% 0 0 0)'
     }, {
       clipPath: 'inset(0% 0 0 0)',
       ease: 'none'
     }, 0)
     .fromTo(textWhite, {
-      clipPath: 'inset(100% 0 0 0)'
+      clipPath: 'inset(100% 0 0 0)',
+      y: 0, // 시작 위치
     }, {
       clipPath: 'inset(0% 0 0 0)',
+      y: -200, // 수정: 스크롤하면서 위로 올라가도록 y값 변경
       ease: 'none'
-    }, 0);
+    }, 0)
 }
 
 // === Swiper 초기화 ===
 function initSwiper() {
   new Swiper(".swiper", {
     slidesPerView: 'auto',
-    spaceBetween: 38,
+    spaceBetween: 30,
     navigation: {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev",
@@ -116,7 +125,7 @@ function initSwiper() {
         spaceBetween: 20
       },
       1200: {
-        spaceBetween: 40
+        spaceBetween: 30
       }
     }
   });
@@ -126,7 +135,7 @@ function initSwiper() {
 function initTextInteraction() {
   const spans = document.querySelectorAll('.text-interaction span');
   spans.forEach((span, i) => {
-    const wTarget = 420;
+    const wTarget = 337;
     gsap.fromTo(span, {
       width: 0,
       opacity: 0,
@@ -164,16 +173,16 @@ function initServicesSection() {
     link.addEventListener('click', (e) => {
       e.preventDefault();
 
-      document.querySelector('.tabnav .active') ?.classList.remove('active');
+      document.querySelector('.tabnav .active')?.classList.remove('active');
       link.classList.add('active');
 
       tabContents.forEach((content) => {
         content.classList.remove('active');
       });
 
-      const targetId = link.querySelector('a') ?.getAttribute('href');
+      const targetId = link.querySelector('a')?.getAttribute('href');
       if (targetId) {
-        document.querySelector(targetId) ?.classList.add('active');
+        document.querySelector(targetId)?.classList.add('active');
       }
 
       servicesSwiper.slideTo(index);
@@ -213,32 +222,32 @@ function initLeadershipSection() {
   // 위쪽 이미지들 (1~3)
   leadershipTimeline.fromTo(
     ".leadership .bg-item:not(:nth-last-child(-n+2)) img", {
-      yPercent: 80,
-      opacity: 1,
-      x: (i) => i === 0 ? -150 : 150
-    }, {
-      yPercent: -90,
-      opacity: 1,
-      stagger: 0.3,
-      ease: "none"
-    }
+    yPercent: 80,
+    opacity: 1,
+    x: (i) => i === 0 ? -150 : 150
+  }, {
+    yPercent: -90,
+    opacity: 1,
+    stagger: 0.3,
+    ease: "none"
+  }
   );
 
   // 마지막 이미지들 (4, 5)
   leadershipTimeline.fromTo(
     ".leadership .bg-item:nth-last-child(-n+2) img", {
-      yPercent: 150,
-      opacity: 1,
-      x: (i) => i === 0 ? -150 : 150
-    }, {
-      y: (i, el) => {
-        if (i === 0) return window.innerHeight * 0.1;
-        else return window.innerHeight - el.offsetHeight;
-      },
-      opacity: 1,
-      ease: "none",
-      stagger: 0.5
+    yPercent: 150,
+    opacity: 1,
+    x: (i) => i === 0 ? -150 : 150
+  }, {
+    y: (i, el) => {
+      if (i === 0) return window.innerHeight * 0.1;
+      else return window.innerHeight - el.offsetHeight;
     },
+    opacity: 1,
+    ease: "none",
+    stagger: 0.5
+  },
     "<"
   );
 
@@ -280,33 +289,46 @@ function initCareersSection() {
   if (!careersInner || !careersContent || !careersBtn) return;
 
   gsap.timeline({
-      scrollTrigger: {
-        trigger: '.careers',
-        start: 'top top',
-        end: '+=1000',
-        scrub: true,
-        pin: true,
-        pinSpacing: true
-      }
-    })
+    scrollTrigger: {
+      trigger: '.careers',
+      start: 'top top',
+      end: '+=1000',
+      scrub: true,
+      pin: true,
+      pinSpacing: true
+    }
+  })
     .to(careersInner, {
       width: '100vw',
       height: '100vh',
       ease: 'none'
     }, 0)
     .fromTo(careersContent, {
-      y: 50,
-      opacity: 0
+      y: 50
     }, {
       y: 0,
-      opacity: 1,
       ease: 'back.out(1.7)'
-    })
-    .to(careersBtn, {
-      opacity: 1,
+    }, 0)
+    .fromTo(careersBtn, {
+      y: 50
+    }, {
       y: 0,
       ease: 'back.out(1.7)'
-    }, 0.2);
+    }, 0.2)
+    .fromTo(careersContent, { // 수정: careersContent의 opacity 애니메이션 추가
+      opacity: 0
+    }, {
+      opacity: 1,
+      duration: 0.8, // 수정: opacity 애니메이션을 더 길게
+      ease: 'none'
+    }, 0)
+    .fromTo(careersBtn, { // 수정: careersBtn의 opacity 애니메이션 추가
+      opacity: 0
+    }, {
+      opacity: 1,
+      duration: 0.8, // 수정: opacity 애니메이션을 더 길게
+      ease: 'none'
+    }, 0.2); // 수정: 시작 시점은 기존과 동일
 }
 
 // === Footer 섹션 초기화 ===

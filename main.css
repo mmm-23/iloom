@@ -5,55 +5,70 @@
   height: 150vh;
   /* margin-top: 278px; */
   background-attachment: fixed;
-    padding: 0 0 290px 0;
+  padding: 0 0 290px 0;
 }
 .hero .text {
-  padding-top: 200px;
+  padding-top: 310px;
   position: absolute;
   z-index: 0;
-  padding-left: 290px;
+  padding-left: 73px;
 }
 
 .hero .text.white {
-  padding-top: 200px;
+  padding-top: 310px;
   position: absolute;
   z-index: 25;
-  padding-left: 290px;
+  padding-left: 73px;
   color: #fff;
   will-change: transform;
 }
 
+.hero p {
+  margin: 0;
+  font-weight: 600;
+  font-size: 6.8rem;
+  letter-spacing: -0.136rem;
+  line-height: 8.8rem;
+  color: #b2b2b2;
+}
+.hero p:nth-child(1) {
+  color: #111;
+}
+.hero p:nth-child(3) {
+  margin-bottom: 110px;
+}
 .hero .white p {
   color: white;
 }
+
 .hero .cover {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: auto;
-    bottom: auto;
-    width: 100%;
-    height: 100%
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: auto;
+  bottom: auto;
+  width: 100%;
+  height: 100%
 }
 
 .hero .cover-clip {
   position: absolute;
+  overflow: hidden;
   z-index: 20;
   width: 100%;
-  /* height: 600px; */
-  transition: transform 0.1s linear;
   height: 100%;
   top: 0px;
-  overflow: hidden;
+  transition: transform 0.1s linear;
 }
 .cover-image {
   position: absolute;
   background: url(/image/main/Grif-pZboAIOSuo.jpg) no-repeat center center/cover;
   width: 90%;
-  /* height: 600px; */
   height: 70%;
-  left: 40px;
+  left: 50%;
+  /* transform: translateX(-50%); */
   top: 0px;
+  padding: 0 73px;
   overflow: hidden;
 }
 
@@ -63,33 +78,17 @@
   object-fit: cover;
 }
 
-.hero p {
-  margin: 0;
-  font-weight: 600;
-  font-size: 8.5rem;
-  letter-spacing: -0.136rem;
-  line-height: 11.1rem;
-  color: #b2b2b2;
-}
-
-.hero p:nth-child(1) {
-  color: #111;
-}
-
-.hero p:nth-child(3) {
-  margin-bottom: 125px;
-}
 
 
 
 /* Swiper section */
 .category {
-  margin-top: 51.25em;
+  /* margin-top: 18em; */
   margin-bottom: 325px;
-  padding: 0 0 0 175px !important;
+  padding: 0 0 0 73px !important;
 }
 .category .swiper .tit {
-  padding-right: 175px;
+  padding-right: 73px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -127,43 +126,60 @@
   display: flex;
   flex-direction: row;
 }
+.category .swiper-slide a {
+  display: flex;
+  flex-direction: column;
+}
+.category .swiper-slide .img-wrapper {
+  display: block;
+  overflow: hidden;
+  width: 55.5rem;
+  height: 31.2rem;
+  margin-bottom: 20px;
+}
 .category .swiper-slide img {
-  width: 694px;
-  height: 396px;
+  width: 100%; /* 수정: 부모(a 태그)에 맞춰 너비 100% */
+  height: 100%;
   margin-bottom: 20px;
   object-fit: cover;
+  transition: transform 0.5s ease-out;
 }
+
+.category .swiper-slide a img:hover {
+  transform: scale(1.1);
+}
+
 .category .swiper-slide h3 {
   font-family: Pretendard, sans-serif;
   margin: 0;
   font-weight: 400;
-  font-size: 3.3rem;
-  line-height: 4.2rem;
+  font-size: 2.6rem;
+  line-height: 3.4rem;
   color: #111;
 }
 .category .swiper-slide p {
-  font-size: 2.2rem;
-  line-height: 2.4rem;
+  font-size: 1.6rem;
+  line-height: 1.9rem;
   color: #999;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 .category .swiper-slide {
-  width: 694px;
+  width: 55.5rem;
 }
 .category .swiper-slide:last-child {
-  margin-right: 175px;
+  margin-right: 73px;
 }
 
 /* Text Interaction section */
 .text-interaction {
-  padding-bottom: 388px;
+  padding-bottom: 26rem;
 }
 .text-interaction p {
   margin: 0;
   font-weight: 500;
-  font-size: 8rem;
+  font-size: 6.4rem;
   letter-spacing: -0.136rem;
-  line-height: 12.8rem;
+  line-height: 10.2rem;
   color: #111;
   transition: transform 0.1s linear;
 }
@@ -182,7 +198,7 @@
   position: relative;
   display: inline-block;
   vertical-align: middle;
-  height: 128px;
+  height: 10.2rem;
   width: 0;
   opacity: 0;
   overflow: hidden;
@@ -190,7 +206,7 @@
   transition: transform 0.1s linear;
 }
 .text-interaction span.on {
-  width: 420px;
+  width: 33.7rem;
   opacity: 1;
 }
 .text-interaction span img {
@@ -220,10 +236,10 @@
 .services .tabnav ul li a {
   display: inline-block;
   color: #b2b2b2;
-  font-size: 2.3rem;
+  font-size: 1.8rem;
   font-weight: 500;
-  line-height: 2.9rem;
-  padding-bottom: 25px;
+  line-height: 2.3rem;
+  padding-bottom: 20px;
   border-bottom: 1px solid transparent;
 }
 .services .tabnav ul li.active a {
@@ -237,7 +253,7 @@
   margin: 40px 0 0;
   display: grid;
   align-items: center;
-  grid-template-columns: 1fr 1026px;
+  grid-template-columns: 1fr 82rem;
   gap: 70px;
 }
 .tab-content .tab01,
@@ -256,15 +272,15 @@
 .tab-content h4 {
   margin: 0;
   font-weight: 500;
-  font-size: 3.8rem;
-  line-height: 5.3rem;
+  font-size: 3rem;
+  line-height: 4.2rem;
   color: #111;
-  /* margin-bottom: 20px; */
+  margin-bottom: 1.6rem;
 }
 .tab-content p {
   font-weight: 500;
-  font-size: 2rem;
-  line-height: 3.2rem;
+  font-size: 1.6rem;
+  line-height: 2.6rem;
   color: #111;
   margin-bottom: 40px;
 }
@@ -272,8 +288,8 @@
   display: flex;
   align-items: center;
   font-weight: 600;
-  font-size: 2.5rem;
-  line-height: 3rem;
+  font-size: 2rem;
+  line-height: 2.4rem;
   color: #111;
   margin: 15px 0px;
 }
@@ -281,8 +297,8 @@
   content: "";
   display: inline-block;
   background-image: url(/image/common/ico-seemore.svg);
-  width: 30px;
-  height: 30px;
+  width: 2.4rem;
+  height: 2.4rem;
   margin-left: 10px;
   background-repeat: no-repeat;
   background-size: contain;
@@ -290,8 +306,8 @@
   transition: transform .3s 0s;
 }
 .tab-content .slider {
-  width: 1026px;
-  height: 1026px;
+  width: 82rem;
+  height: 82rem;
   position: relative;
   overflow: hidden;
 }
@@ -393,27 +409,25 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 0 175px;
+  padding: 0 73px;
   text-align: center;
   width: 100%;
   z-index: 2;
   will-change: transform, opacity;
 }
-.careers .tit-w {
+/* .careers .tit-w {
   margin-bottom: 30px;
-  transform: translateY(50px);
-}
+} */
 .careers .more-black {
-  font-size: 2.8rem;
-  transform: translateY(50px);
+  margin-top: 4rem;
 }
 .careers .more-black a {
   display: inline-flex;
   align-items: center;
   font-weight: 600;
-  font-size: 2.5rem;
-  line-height: 2.5rem;
-  padding: 20px 35px;
+  font-size: 2rem;
+  line-height: 2rem;
+  padding: 1.7rem 2.8rem;
   color: #fff;
   background-color: #111;
   border-radius: 35px;
@@ -422,7 +436,7 @@
   content: "";
   display: inline-block;
   background: url(/image/common/ico-seemore-w.svg) no-repeat center center / cover;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 2.4rem;
+  height: 2.4rem;
   margin-left: 10px;
 }

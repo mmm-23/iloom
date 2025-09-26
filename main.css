@@ -7,6 +7,7 @@
   background-attachment: fixed;
   padding: 0 0 290px 0;
 }
+
 .hero .text {
   padding-top: 310px;
   position: absolute;
@@ -63,7 +64,7 @@
 .cover-image {
   position: absolute;
   background: url(/image/main/Grif-pZboAIOSuo.jpg) no-repeat center center/cover;
-  width: 90%;
+  width: calc(100% - 146px);
   height: 70%;
   left: 50%;
   /* transform: translateX(-50%); */
@@ -261,14 +262,13 @@
 .tab-content .tab03 {
   display: none;
 }
-.tab-content .tab01.active {
+.tab-content .tab01.active,
+.tab-content .tab02.active,
+.tab-content .tab03.active {
   display: grid;
   grid-template-columns: 1fr;
 }
-.tab-content .tab02.active,
-.tab-content .tab03.active {
-  display: block;
-}
+
 .tab-content h4 {
   margin: 0;
   font-weight: 500;
@@ -439,4 +439,146 @@
   width: 2.4rem;
   height: 2.4rem;
   margin-left: 10px;
+}
+
+
+
+
+
+
+@media all and (max-width: 479px) {
+
+  .hero {
+    height: 100vh;
+    padding: 0;
+  }
+
+  .hero .text {
+    padding: 150px 20px 0;
+    z-index: 1;
+    position: relative;
+  }
+
+  .hero p {
+    font-size: 3.8rem;
+    line-height: 1.4;
+  }
+
+  .hero .cover-clip {
+    height: 60%;
+  }
+
+  .hero .text.white {
+    display: none;
+  }
+
+  /* Category(Swiper) 섹션 */
+  .category {
+    margin-bottom: 100px;
+    padding: 0 !important;
+  }
+  
+  .category .swiper {
+    padding: 0 20px;
+  }
+
+  .category .swiper .tit {
+    padding-right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 30px;
+  }
+  
+  .category .swiper .tit .swiper-nav {
+    margin-top: 20px;
+  }
+
+  .category .swiper-slide {
+    width: 28rem;
+  }
+
+  .category .swiper-slide:last-child {
+    margin-right: 20px;
+  }
+  
+  .category .swiper-slide .img-wrapper {
+    height: 18rem;
+  }
+
+  /* Text Interaction 섹션 */
+  .text-interaction {
+    padding-bottom: 100px;
+  }
+
+  .text-interaction p {
+    font-size: 3.2rem;
+    line-height: 1.5;
+    padding-left: 16px;
+  }
+
+  .text-interaction span {
+    height: 5rem;
+    width: 16rem !important;
+    margin-right: 10px;
+  }
+
+  /* Services 섹션 */
+  .services {
+    padding-left: 16px;
+}
+  .services .tabnav ul {
+    flex-wrap: wrap;
+  }
+  
+  .services .tabnav ul li {
+    padding: 20px 15px 0 0;
+  }
+
+  .services .tabnav ul li a {
+    font-size: 1.6rem;
+    padding-bottom: 10px;
+  }
+  
+  .tab-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .tab-content .slider {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .tab-content h4 {
+    font-size: 2.4rem;
+  }
+
+  /* Leadership 섹션 */
+  .leadership .sticky-holder .align-warp h2 {
+    font-size: 2.8rem;
+    line-height: 1.4;
+  }
+
+  /* Careers 섹션 */
+  .careers-inner {
+    width: 90vw;
+    height: 70vh;
+  }
+
+  .careers-content {
+  padding: 0 16px;
+  width: 100%;
+  }
+
+  .careers-content h2 {
+    font-size: 2.2rem;
+    line-height: 1.5;
+  }
+
+  footer .ft-waper {
+
+  padding: 0 16px;
+
+}
 }

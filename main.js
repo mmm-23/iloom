@@ -65,6 +65,8 @@ function initHeroSection() {
   const coverClip = document.querySelector('.cover-clip');
   const textWhite = document.querySelector('.text.white');
 
+  const newWidth = window.innerWidth - 146;
+
   if (!coverImage || !coverClip || !textWhite) return;
 
   gsap.timeline({
@@ -80,19 +82,20 @@ function initHeroSection() {
   })
     .set(coverImage, { xPercent: -50 })
     .fromTo(coverImage, {
-      width: '92%',
-      height: '80%',
+      width: newWidth,
+      height: '70%',
       xPercent: -50,
       filter: "brightness(1)"
     }, {
       width: '100%',
-      height: '80%',
+      height: '70%',
       xPercent: -50,
       transformOrigin: 'center top',
       filter: "brightness(0.7)",
       ease: 'power3.in'
     }, 0)
     .fromTo(coverClip, {
+      // clipPath: 'inset(562px 0 0 0)'
       clipPath: 'inset(46% 0 0 0)'
     }, {
       clipPath: 'inset(0% 0 0 0)',
@@ -103,7 +106,7 @@ function initHeroSection() {
       y: 0, // 시작 위치
     }, {
       clipPath: 'inset(0% 0 0 0)',
-      y: -200, // 수정: 스크롤하면서 위로 올라가도록 y값 변경
+      y: 0, // 수정: 스크롤하면서 위로 올라가도록 y값 변경
       ease: 'none'
     }, 0)
 }

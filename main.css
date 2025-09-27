@@ -472,7 +472,7 @@
     display: none;
   }
 
-  /* Category(Swiper) 섹션 */
+  /* Category 섹션 */
   .category {
     margin-bottom: 100px;
     padding: 0 !important;
@@ -484,16 +484,15 @@
 
   .category .swiper .tit {
     padding-right: 0;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 30px;
+    flex-direction: row;
+    align-items: center;
   }
-  
-  .category .swiper .tit .swiper-nav {
-    margin-top: 20px;
+  .category .swiper-nav .swiper-button-prev, 
+  .category .swiper-nav .swiper-button-next {
+    display: none;
   }
-
   .category .swiper-slide {
+    margin-right: 0 !important;
     width: 28rem;
   }
 
@@ -540,6 +539,8 @@
   }
   
   .tab-content {
+    display: flex;
+    flex-direction: column-reverse; /* 순서를 반대로 */
     grid-template-columns: 1fr;
     gap: 40px;
   }

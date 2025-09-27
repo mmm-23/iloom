@@ -61,6 +61,32 @@ function initHeader() {
 
 // === Hero 섹션 (cover) 초기화 ===
 function initHeroSection() {
+  // 모바일 기준
+  const mobileBreakpoint = 768;
+
+  // 현재 창의 너비가 모바일 기준보다 작으면 함수를 즉시 종료
+  if (window.innerWidth < mobileBreakpoint) {
+
+    const coverImage = document.querySelector('.cover-image');
+    if (coverImage) {
+      gsap.set(coverImage, {
+        top: '400px',
+        width: '100%',
+        height: '60%', // 모바일 높이에 맞게 조정
+        xPercent: -50,
+        filter: "brightness(0.7)"
+      });
+    }
+    // 애니메이션 관련 요소 숨김 처리
+    const textWhite = document.querySelector('.text.white');
+    if(textWhite) {
+      textWhite.style.display = 'none';
+    }
+    return; // GSAP 타임라인 실행 방지
+  }
+
+  // --- 이하 코드는 데스크톱 환경에서만 실행됩니다 ---
+
   const coverImage = document.querySelector('.cover-image');
   const coverClip = document.querySelector('.cover-clip');
   const textWhite = document.querySelector('.text.white');
@@ -77,7 +103,6 @@ function initHeroSection() {
       scrub: true,
       pin: true,
       anticipatePin: 1,
-      // pinSpacing: true
     }
   })
     .set(coverImage, { xPercent: -50 })
@@ -95,7 +120,6 @@ function initHeroSection() {
       ease: 'power3.in'
     }, 0)
     .fromTo(coverClip, {
-      // clipPath: 'inset(562px 0 0 0)'
       clipPath: 'inset(46% 0 0 0)'
     }, {
       clipPath: 'inset(0% 0 0 0)',
@@ -103,10 +127,10 @@ function initHeroSection() {
     }, 0)
     .fromTo(textWhite, {
       clipPath: 'inset(100% 0 0 0)',
-      y: 0, // 시작 위치
+      y: 0,
     }, {
       clipPath: 'inset(0% 0 0 0)',
-      y: 0, // 수정: 스크롤하면서 위로 올라가도록 y값 변경
+      y: 0,
       ease: 'none'
     }, 0)
 }
@@ -115,7 +139,7 @@ function initHeroSection() {
 function initSwiper() {
   new Swiper(".swiper", {
     slidesPerView: 'auto',
-    spaceBetween: 30,
+    // spaceBetween: 30,
     navigation: {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev",

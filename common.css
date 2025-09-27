@@ -135,6 +135,10 @@ header .lang a::after {
   background-size: contain;
 }
 
+header a.btn-hamburger {
+  display: none;
+}
+
 /* Section */
 section {
   padding: 0 73px;
@@ -272,17 +276,29 @@ footer .footer-bg {
   header {
     height: 60px;
   }
-
-  header .header-warp {
+  header .header-warp{
     margin: 0 16px;
+  }
+  header .logo img {
+    height: 20px;
+  }
+  header a {
+    margin: 0;
   }
 
   header nav {
     display: none;
   }
+  header a.btn-hamburger {
+    display: inline-block;
+    background-image: url(/image/common/ico-hamburger.svg);
+    background-position: center;
+    width: 24px;
+    height: 24px;
+  }
 
   header .lang {
-    margin-left: 0;
+    display: none;
   }
 
   section h2 {
